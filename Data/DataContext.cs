@@ -16,7 +16,7 @@ namespace ResortApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Hotel>()
-                .HasKey(pc => new { pc.HotelId });
+                .HasKey(h => new { h.HotelId });
 
             modelBuilder.Entity<Hotel>()
                 .HasKey(h => h.HotelId);
