@@ -32,11 +32,10 @@ namespace ResortApp
 
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
 
             app.UseHttpsRedirection();
 
@@ -49,6 +48,7 @@ namespace ResortApp
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<Data.DataContext>();
+                context.Database.Migrate();
                 var seeder = services.GetRequiredService<Seed>();
                 seeder.Initialize(context);
             }
