@@ -10,6 +10,9 @@ namespace ResortApp.Helper
         {
             CreateMap<Hotel, HotelDto>().ReverseMap();
             CreateMap<Reservation, ReservationDto>().ReverseMap();
+            CreateMap<Hotel, CreateHotelDto>().ReverseMap();
+            CreateMap<Reservation, CreateReservationDto>().ReverseMap();
+
         }
     }
 }

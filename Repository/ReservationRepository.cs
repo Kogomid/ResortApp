@@ -43,9 +43,17 @@ namespace ResortApp.Repository
             }
         }
 
-        public void UpdateReservation(Reservation reservation)
+        public bool UpdateReservation(Reservation reservation)
         {
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void DeleteReservation(Reservation reservation)

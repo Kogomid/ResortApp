@@ -45,7 +45,7 @@ namespace ResortApp.Controllers
         [ProducesResponseType(201, Type = typeof(HotelDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(422)]
-        public IActionResult CreateHotel([FromBody] HotelDto hotelCreateDto)
+        public IActionResult CreateHotel([FromBody] CreateHotelDto hotelCreateDto)
         {
             if (hotelCreateDto == null)
                 return BadRequest(ModelState);
@@ -80,7 +80,7 @@ namespace ResortApp.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateHotel(int hotelId, [FromBody] HotelDto hotelUpdateDto)
+        public IActionResult UpdateHotel(int hotelId, [FromBody] CreateHotelDto hotelUpdateDto)
         {
             var hotel = _hotelRepository.GetHotel(hotelId);
             if (hotel == null)

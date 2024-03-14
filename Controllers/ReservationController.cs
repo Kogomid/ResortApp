@@ -45,7 +45,7 @@ namespace ResortApp.Controllers
         [ProducesResponseType(201, Type = typeof(ReservationDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(422)]
-        public IActionResult CreateReservation([FromBody] ReservationDto reservationCreateDto)
+        public IActionResult CreateReservation([FromBody] CreateReservationDto reservationCreateDto)
         {
             if (reservationCreateDto == null)
                 return BadRequest(ModelState);
@@ -82,9 +82,9 @@ namespace ResortApp.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateReservation(int reservationId, [FromBody] ReservationDto reservationUpdateDto)
+        public IActionResult UpdateReservation(int reservationId, [FromBody] CreateReservationDto reservationUpdateDto)
         {
-            if (reservationUpdateDto == null || reservationId != reservationUpdateDto.ReservationId)
+            if (reservationUpdateDto == null)
                 return BadRequest(ModelState);
 
             var reservation = _reservationRepository.GetReservation(reservationId);
@@ -97,6 +97,13 @@ namespace ResortApp.Controllers
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if (!_reservationRepository.UpdateReservation(reservation))
+            {
+                ModelState.AddModelError("", $"An error occurred while updating the reservation");
+                return StatusCode(500, ModelState);
+            }
+
 
             _reservationRepository.UpdateReservation(reservation);
 
